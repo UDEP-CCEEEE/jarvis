@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jarvis Personal</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    display:flex;
+    background:#f4f6f9;
+}
+
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#111827;
+    color:white;
+    padding:20px;
+    position:fixed;
+    left:0;
+    top:0;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:40px;
+}
+
+.menu-item{
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.menu-item:hover{
+    background:#1f2937;
+}
+
+.main{
+    margin-left:260px;
+    padding:40px;
+    width:100%;
+}
+
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">JARVIS</div>
+
+    <div class="menu-item">🏠 Inicio</div>
+    <div class="menu-item">📅 Calendario</div>
+    <div class="menu-item">✅ Tareas</div>
+    <div class="menu-item">📝 Notas</div>
+    <div class="menu-item">📂 Proyectos</div>
+    <div class="menu-item">💡 Ideas</div>
+    <div class="menu-item">🤖 Chat</div>
+    <div class="menu-item">⚙️ Configuración</div>
+
+</div>
+
+<div class="main">
+
+    <h1>Bienvenido a Jarvis</h1>
+    <p>Tu centro personal de productividad.</p>
+
+    <div class="card-container">
+
+        <div class="card">
+            <h3>📅 Próximos eventos</h3>
+            <p>No tienes eventos programados.</p>
+        </div>
+
+        <div class="card">
+            <h3>✅ Tareas pendientes</h3>
+            <p>No tienes tareas pendientes.</p>
+        </div>
+
+        <div class="card">
+            <h3>💡 Ideas recientes</h3>
+            <p>Aún no has guardado ideas.</p>
+        </div>
+
+        <div class="card">
+            <h3>🤖 Jarvis</h3>
+            <p>¿En qué puedo ayudarte hoy?</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
