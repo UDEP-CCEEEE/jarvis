@@ -197,11 +197,24 @@
             overflow: hidden;
         }
 
+        /* Arreglado: Añadido overflow-y scroll para permitir ver todos los iconos */
         .center-panel {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        /* Estilización básica de la barra de scroll para mantener la limpieza visual */
+        .center-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+        .center-panel::-webkit-scrollbar-thumb {
+            background: rgba(0, 114, 255, 0.2);
+            border-radius: 4px;
+        }
+        .center-panel::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 114, 255, 0.4);
         }
 
         .welcome-section {
@@ -212,8 +225,9 @@
             text-align: center;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            flex-shrink: 0;
         }
 
         .logo-wrapper {
@@ -288,7 +302,8 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 16px;
-            margin-top: 15px;
+            margin-top: 5px;
+            padding-bottom: 30px; /* Asegura un margen inferior cómodo para el scroll */
         }
 
         .action-btn {
@@ -678,7 +693,6 @@
                 <span>JARVIS OS</span>
             </div>
 
-            <!-- Menús Desplegables de Configuración Omitidos en brevedad de estilos para coincidir exactamente con el dashboard -->
             <!-- Archivos -->
             <div class="menu-item">
                 <i class="fa-regular fa-folder"></i> Archivos
@@ -837,7 +851,7 @@
                 </div>
             </div>
 
-            <!-- BOTONES GRANDES -->
+            <!-- BOTONES GRANDES (Con scroll vertical habilitado si la pantalla es pequeña) -->
             <div class="quick-actions">
                 <div class="action-btn"><i class="fa-solid fa-calendar-week"></i><span>Cronograma</span></div>
                 <div class="action-btn"><i class="fa-solid fa-users"></i><span>Distribución</span></div>
@@ -981,17 +995,14 @@
         // --- SISTEMA DE MEMORIA NATIVA (localStorage) ---
         const notesTextarea = document.getElementById('notesMemory');
 
-        // Cargar Notas desde memoria al iniciar
         if (localStorage.getItem('jarvis_notes')) {
             notesTextarea.value = localStorage.getItem('jarvis_notes');
         }
 
-        // Guardar Notas automáticamente mientras escribes
         notesTextarea.addEventListener('input', function() {
             localStorage.setItem('jarvis_notes', notesTextarea.value);
         });
 
-        // Tareas por defecto si la memoria está vacía
         let defaultTodos = [
             { text: "Revisar actas de notas", checked: true },
             { text: "Generar croquis de aulas", checked: false },
@@ -1042,9 +1053,7 @@
             renderTodos();
         }
 
-        // Inicializar la lista de tareas
         renderTodos();
-
 
         // --- MODALES ---
         function openModal(id) {
