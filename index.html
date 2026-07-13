@@ -4,75 +4,255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JARVIS OS - Login</title>
+
+    <!-- Icono de la pestaña (Favicon) -->
+    <link rel="icon" type="image/png" href="JARVIS OS.png">
+
+    <!-- Fuentes e Iconos Externos -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #0b0f19; overflow: hidden; position: relative; }
-        .background { position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, transparent 50%), radial-gradient(circle at 20% 80%, #0d9488 0%, transparent 50%); filter: blur(80px); z-index: -1; }
-        .login-container { position: relative; width: 420px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3); text-align: center; }
-        .brand-header { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 8px; }
-        .brand-header img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(0, 242, 254, 0.6); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
-        .brand-header h1 { color: #ffffff; font-size: 1.9rem; font-weight: 600; letter-spacing: 1px; }
-        .logo p { color: #94a3b8; font-size: 0.70rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 30px; }
-        .input-box { position: relative; width: 100%; margin-bottom: 20px; }
-        .input-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 1.1rem; }
-        .input-box input { width: 100%; padding: 12px 16px 12px 45px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; outline: none; color: #fff; font-size: 0.95rem; transition: all 0.3s ease; }
-        .input-box input:focus { background: rgba(255, 255, 255, 0.1); border-color: #00f2fe; box-shadow: 0 0 10px rgba(0, 242, 254, 0.2); }
-        .input-box input::placeholder { color: #64748b; }
-        .remember { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 25px; color: #94a3b8; font-size: 0.85rem; }
-        .remember input { margin-right: 8px; accent-color: #00f2fe; cursor: pointer; }
-        button { width: 100%; padding: 12px; background: linear-gradient(135deg, #0072ff 0%, #00f2fe 100%); border: none; border-radius: 8px; color: #fff; font-size: 1rem; font-weight: 500; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        #mensajeError { font-size: 0.85rem; margin-top: 15px; min-height: 20px; }
-        .version { position: absolute; bottom: 20px; color: #475569; font-size: 0.8rem; letter-spacing: 1px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0b0f19; 
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fondo difuminado estilo Windows 11 */
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, transparent 50%),
+                        radial-gradient(circle at 20% 80%, #0d9488 0%, transparent 50%);
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        /* Contenedor Glassmorphism */
+        .login-container {
+            position: relative;
+            width: 420px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease, border 0.3s ease;
+        }
+
+        .login-container:hover {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Cabecera alineada horizontalmente */
+        .brand-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; 
+            margin-bottom: 8px;
+        }
+
+        .brand-header img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(0, 242, 254, 0.6);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        .brand-header h1 {
+            color: #ffffff;
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .logo p {
+            color: #94a3b8;
+            font-size: 0.70rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+        }
+
+        /* Campos de Entrada */
+        .input-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px 16px 12px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            outline: none;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-box input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00f2fe;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        .input-box input::placeholder {
+            color: #64748b;
+        }
+
+        .remember {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .remember input {
+            margin-right: 8px;
+            accent-color: #00f2fe;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #0072ff 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        #mensajeError {
+            font-size: 0.85rem;
+            margin-top: 15px;
+            min-height: 20px;
+            font-weight: 400;
+        }
+
+        .version {
+            position: absolute;
+            bottom: 20px;
+            color: #475569;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
+
     <div class="background"></div>
+
     <div class="login-container">
         <div class="logo">
             <div class="brand-header">
-                <img src="assets/logo/JARVIS.PNG.jfif" alt="JARVIS" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                <img src="JARVIS OS.png" alt="JARVIS OS" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
                 <h1>JARVIS OS</h1>
             </div>
             <p>Just Advanced Responsive Virtual Intelligence System</p>
         </div>
+
         <form id="loginForm">
             <div class="input-box">
                 <i class="fa-solid fa-user"></i>
                 <input type="text" id="usuario" placeholder="Usuario" autocomplete="off" required>
             </div>
+
             <div class="input-box">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" id="password" placeholder="Contraseña" required>
             </div>
+
             <div class="remember">
-                <label><input type="checkbox"> Recordarme</label>
+                <label>
+                    <input type="checkbox"> Recordarme
+                </label>
             </div>
-            <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</button>
+
+            <button type="submit">
+                <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+            </button>
+
             <p id="mensajeError"></p>
         </form>
     </div>
-    <div class="version">JARVIS OS v1.0</div>
+
+    <div class="version">
+        JARVIS OS v1.0
+    </div>
+
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
             const usuarioInput = document.getElementById('usuario').value.trim();
             const passwordInput = document.getElementById('password').value;
             const mensajeError = document.getElementById('mensajeError');
 
-            if (usuarioInput === "Lazaropuri" && passwordInput === "L@zaro0697") {
+            const USUARIO_VALIDO = "Lazaropuri";
+            const PASSWORD_VALIDO = "L@zaro0697";
+
+            if (usuarioInput === USUARIO_VALIDO && passwordInput === PASSWORD_VALIDO) {
                 mensajeError.style.color = "#10b981";
                 mensajeError.innerHTML = '<i class="fa-solid fa-circle-check"></i> Acceso concedido. Iniciando JARVIS OS...';
+                
                 setTimeout(() => {
                     window.location.href = "dashboard.html"; 
                 }, 1000);
+
             } else {
                 mensajeError.style.color = "#ef4444";
-                if (usuarioInput !== "Lazaropuri") {
+                if (usuarioInput !== USUARIO_VALIDO) {
                     mensajeError.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> El usuario ingresado no existe.';
                 } else {
-                    mensajeError.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Contraseña incorrecta.';
+                    mensajeError.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Contraseña incorrecta. Inténtalo de nuevo.';
                 }
             }
         });
