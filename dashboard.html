@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JARVIS OS - Dashboard</title>
     
+    <!-- Icono de la pestaña (Favicon) -->
+    <link rel="icon" type="image/png" href="JARVIS OS.png">
+
+    <!-- Fuentes e Iconos Externos -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
-        /* ==========================================================================
-           ESTILOS BASE Y ESCRITORIO MODERNOS (Glassmorphism)
-           ========================================================================== */
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +44,7 @@
         }
 
         /* ==========================================================================
-           BARRA SUPERIOR (MENÚ WINDOWS STYLE CON HOVER EFFECT)
+           BARRA SUPERIOR (MENÚ WINDOWS STYLE)
            ========================================================================== */
         .top-bar {
             height: 50px;
@@ -82,7 +83,7 @@
             border: 1px solid rgba(0, 242, 254, 0.5);
         }
 
-        /* Menús Desplegables Activos */
+        /* Menús Desplegables */
         .menu-item {
             position: relative;
             padding: 6px 12px;
@@ -98,7 +99,6 @@
             color: #fff;
         }
 
-        /* Listas del Submenú */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -141,7 +141,7 @@
             padding-left: 22px;
         }
 
-        /* Barra de búsqueda integrada */
+        /* Barra de búsqueda */
         .search-box {
             position: relative;
             width: 280px;
@@ -175,7 +175,7 @@
         }
 
         /* ==========================================================================
-           ÁREA DE DISTRIBUCIÓN PRINCIPAL (GRID REPARTIDO)
+           WORKSPACE GRID
            ========================================================================== */
         .main-workspace {
             flex: 1;
@@ -186,7 +186,6 @@
             overflow: hidden;
         }
 
-        /* CONTENEDOR CENTRAL */
         .center-panel {
             display: flex;
             flex-direction: column;
@@ -234,7 +233,6 @@
             margin-bottom: 30px;
         }
 
-        /* Tarjetas de Indicadores Rápidos */
         .status-overview {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -253,11 +251,6 @@
             font-size: 0.88rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
             color: #cbd5e1;
-            transition: background 0.2s;
-        }
-
-        .status-card:hover {
-            background: rgba(255, 255, 255, 0.06);
         }
 
         .status-card i {
@@ -265,7 +258,7 @@
             font-size: 1.1rem;
         }
 
-        /* ACCESOS RÁPIDOS INFERIORES */
+        /* ACCESOS RÁPIDOS */
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -308,7 +301,7 @@
             color: #fff;
         }
 
-        /* PANEL LATERAL DERECHO */
+        /* REPARTO LATERAL RIGHT */
         .right-sidebar {
             background: rgba(15, 23, 42, 0.3);
             backdrop-filter: blur(15px);
@@ -333,7 +326,6 @@
             gap: 10px;
         }
 
-        /* Reloj y Fecha */
         .time-widget {
             text-align: center;
             background: rgba(255, 255, 255, 0.02);
@@ -347,17 +339,14 @@
             font-weight: 700;
             color: #fff;
             letter-spacing: 1px;
-            line-height: 1;
             margin-bottom: 5px;
         }
 
         #date {
             font-size: 0.85rem;
             color: #00f2fe;
-            font-weight: 400;
         }
 
-        /* Clima */
         .weather-info {
             display: flex;
             align-items: center;
@@ -365,7 +354,6 @@
             background: rgba(255, 255, 255, 0.02);
             padding: 14px 18px;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .weather-temp {
@@ -373,8 +361,7 @@
             font-weight: 600;
         }
 
-        /* Listas y Notas */
-        .todo-list, .notes-box {
+        .todo-list {
             font-size: 0.88rem;
             color: #cbd5e1;
             display: flex;
@@ -389,12 +376,6 @@
             background: rgba(255, 255, 255, 0.02);
             padding: 10px 12px;
             border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-        }
-
-        .todo-item input {
-            accent-color: #00f2fe;
-            cursor: pointer;
         }
 
         .notes-area {
@@ -408,11 +389,6 @@
             resize: none;
             font-size: 0.85rem;
             outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .notes-area:focus {
-            border-color: #00f2fe;
         }
     </style>
 </head>
@@ -423,10 +399,11 @@
     <header class="top-bar">
         <div class="nav-container">
             <div class="brand-os">
-                <img src="assets/logo/JARVIS.PNG.jfif" alt="JARVIS Core Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                <img src="JARVIS OS.png" alt="JARVIS OS" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
                 <span>JARVIS OS</span>
             </div>
 
+            <!-- Archivos -->
             <div class="menu-item">
                 <i class="fa-regular fa-folder"></i> Archivos
                 <div class="dropdown">
@@ -445,6 +422,7 @@
                 </div>
             </div>
 
+            <!-- Generar -->
             <div class="menu-item">
                 <i class="fa-solid fa-gears"></i> Generar
                 <div class="dropdown">
@@ -462,6 +440,7 @@
                 </div>
             </div>
 
+            <!-- Secretaría -->
             <div class="menu-item">
                 <i class="fa-solid fa-hotel"></i> Secretaría
                 <div class="dropdown">
@@ -479,6 +458,7 @@
                 </div>
             </div>
 
+            <!-- Reportes -->
             <div class="menu-item">
                 <i class="fa-solid fa-chart-pie"></i> Reportes
                 <div class="dropdown">
@@ -495,6 +475,7 @@
                 </div>
             </div>
 
+            <!-- IA -->
             <div class="menu-item" style="color: #00f2fe; font-weight: 500;">
                 <i class="fa-solid fa-robot"></i> IA
                 <div class="dropdown">
@@ -511,6 +492,7 @@
                 </div>
             </div>
 
+            <!-- Herramientas -->
             <div class="menu-item">
                 <i class="fa-solid fa-screwdriver-wrench"></i> Herramientas
                 <div class="dropdown">
@@ -527,6 +509,7 @@
                 </div>
             </div>
 
+            <!-- Automatizaciones -->
             <div class="menu-item">
                 <i class="fa-solid fa-bolt"></i> Automatizaciones
                 <div class="dropdown">
@@ -542,6 +525,7 @@
                 </div>
             </div>
 
+            <!-- Perfil -->
             <div class="menu-item">
                 <i class="fa-regular fa-user"></i> Perfil
                 <div class="dropdown">
@@ -556,15 +540,14 @@
 
         <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Buscar archivos o herramientas...">
+            <input type="text" placeholder="Buscar archivos...">
         </div>
     </header>
 
     <main class="main-workspace">
-        
         <section class="center-panel">
             <div class="welcome-section">
-                <img src="assets/logo/JARVIS.PNG.jfif" class="jarvis-core-logo" alt="JARVIS Core" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                <img src="JARVIS OS.png" class="jarvis-core-logo" alt="JARVIS Core" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
                 <h2>Bienvenido, Lázaro</h2>
                 <p>Buenos días, Lázaro. Hoy tienes:</p>
                 
@@ -576,6 +559,7 @@
                 </div>
             </div>
 
+            <!-- BOTONES GRANDES -->
             <div class="quick-actions">
                 <div class="action-btn"><i class="fa-solid fa-calendar-week"></i><span>Cronograma</span></div>
                 <div class="action-btn"><i class="fa-solid fa-users"></i><span>Distribución</span></div>
@@ -626,21 +610,15 @@
     <script>
         function updateTime() {
             const now = new Date();
-            
-            // Renderizado del Reloj Digital
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
             
-            // Formateador de Fecha Local Elegante
             const options = { weekday: 'long', day: 'numeric', month: 'long' };
             const formattedDate = now.toLocaleDateString('es-ES', options);
-            // Hacer mayúscula la primera letra del día de la semana
             document.getElementById('date').textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
         }
-        
-        // Ejecución en bucle continuo cada segundo
         setInterval(updateTime, 1000);
         updateTime();
     </script>
