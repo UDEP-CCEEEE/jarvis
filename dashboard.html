@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JARVIS OS - Dashboard</title>
     
+    <!-- Icono de la pestaña (Favicon) -->
     <link rel="icon" type="image/png" href="JARVIS OS.png">
 
+    <!-- Fuentes e Iconos Externos -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
@@ -277,7 +279,7 @@
         }
 
         .status-card i {
-            color: #059669; /* Verde profesional */
+            color: #059669; 
             font-size: 1.1rem;
         }
 
@@ -348,7 +350,26 @@
             margin-bottom: 12px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .widget-box h3 div {
+            display: flex;
+            align-items: center;
             gap: 10px;
+        }
+
+        .add-todo-btn {
+            background: transparent;
+            border: none;
+            color: #0072ff;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+
+        .add-todo-btn:hover {
+            transform: scale(1.2);
         }
 
         .time-widget {
@@ -401,20 +422,37 @@
         .todo-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             background: rgba(255, 255, 255, 0.5);
             padding: 10px 12px;
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.7);
         }
 
+        .todo-item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .todo-item input {
             accent-color: #0072ff;
+            cursor: pointer;
+        }
+
+        .todo-item .delete-todo {
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .todo-item .delete-todo:hover {
+            color: #ef4444;
         }
 
         .notes-area {
             width: 100%;
-            height: 90px;
+            height: 110px;
             background: rgba(255, 255, 255, 0.6);
             border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 8px;
@@ -432,7 +470,7 @@
         }
 
         /* ==========================================================================
-           VENTANAS MODULARES FLOTANTES (MODO CLARO)
+           VENTANAS MODULARES FLOTANTES
            ========================================================================== */
         .window-modal {
             position: fixed;
@@ -497,7 +535,7 @@
             padding: 20px;
         }
 
-        /* CALCULADORA (MODO CLARO) */
+        /* CALCULADORA */
         .calc-container {
             width: 320px;
         }
@@ -560,7 +598,7 @@
             grid-column: span 2;
         }
 
-        /* CALENDARIO (MODO CLARO) */
+        /* CALENDARIO */
         .calendar-container {
             width: 350px;
         }
@@ -640,6 +678,8 @@
                 <span>JARVIS OS</span>
             </div>
 
+            <!-- Menús Desplegables de Configuración Omitidos en brevedad de estilos para coincidir exactamente con el dashboard -->
+            <!-- Archivos -->
             <div class="menu-item">
                 <i class="fa-regular fa-folder"></i> Archivos
                 <div class="dropdown">
@@ -658,6 +698,7 @@
                 </div>
             </div>
 
+            <!-- Generar -->
             <div class="menu-item">
                 <i class="fa-solid fa-gears"></i> Generar
                 <div class="dropdown">
@@ -675,6 +716,7 @@
                 </div>
             </div>
 
+            <!-- Secretaría -->
             <div class="menu-item">
                 <i class="fa-solid fa-hotel"></i> Secretaría
                 <div class="dropdown">
@@ -692,6 +734,7 @@
                 </div>
             </div>
 
+            <!-- Reportes -->
             <div class="menu-item">
                 <i class="fa-solid fa-chart-pie"></i> Reportes
                 <div class="dropdown">
@@ -708,6 +751,7 @@
                 </div>
             </div>
 
+            <!-- IA -->
             <div class="menu-item" style="color: #0072ff; font-weight: 600;">
                 <i class="fa-solid fa-robot"></i> IA
                 <div class="dropdown">
@@ -724,6 +768,7 @@
                 </div>
             </div>
 
+            <!-- Herramientas -->
             <div class="menu-item">
                 <i class="fa-solid fa-screwdriver-wrench"></i> Herramientas
                 <div class="dropdown">
@@ -740,6 +785,7 @@
                 </div>
             </div>
 
+            <!-- Automatizaciones -->
             <div class="menu-item">
                 <i class="fa-solid fa-bolt"></i> Automatizaciones
                 <div class="dropdown">
@@ -755,6 +801,7 @@
                 </div>
             </div>
 
+            <!-- Perfil -->
             <div class="menu-item">
                 <i class="fa-regular fa-user"></i> Perfil
                 <div class="dropdown">
@@ -790,6 +837,7 @@
                 </div>
             </div>
 
+            <!-- BOTONES GRANDES -->
             <div class="quick-actions">
                 <div class="action-btn"><i class="fa-solid fa-calendar-week"></i><span>Cronograma</span></div>
                 <div class="action-btn"><i class="fa-solid fa-users"></i><span>Distribución</span></div>
@@ -822,21 +870,23 @@
             </div>
 
             <div class="widget-box">
-                <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
-                <div class="todo-list">
-                    <div class="todo-item"><input type="checkbox" checked> <span>Revisar actas de notas</span></div>
-                    <div class="todo-item"><input type="checkbox"> <span>Generar croquis de aulas</span></div>
-                    <div class="todo-item"><input type="checkbox"> <span>Sincronizar SharePoint</span></div>
+                <h3>
+                    <div><i class="fa-solid fa-list-check"></i> Tareas de hoy</div>
+                    <button class="add-todo-btn" onclick="addNewTodo()"><i class="fa-solid fa-circle-plus"></i></button>
+                </h3>
+                <div id="todoListContainer" class="todo-list">
+                    <!-- Se llena dinámicamente desde la memoria -->
                 </div>
             </div>
 
             <div class="widget-box">
-                <h3><i class="fa-regular fa-note-sticky"></i> Notas rápidas</h3>
-                <textarea class="notes-area" placeholder="Escribe un recordatorio aquí..."></textarea>
+                <h3><i class="fa-regular fa-note-sticky"></i> Recordatorio / Notas rápidas</h3>
+                <textarea id="notesMemory" class="notes-area" placeholder="Escribe un recordatorio aquí..."></textarea>
             </div>
         </aside>
     </main>
 
+    <!-- VENTANA MODAL: CALCULADORA -->
     <div id="calcModal" class="window-modal">
         <div class="window-header">
             <div class="window-title"><i class="fa-solid fa-calculator" style="color: #0072ff;"></i> Calculadora Científica</div>
@@ -889,6 +939,7 @@
         </div>
     </div>
 
+    <!-- VENTANA MODAL: CALENDARIO -->
     <div id="calendarModal" class="window-modal">
         <div class="window-header">
             <div class="window-title"><i class="fa-regular fa-calendar" style="color: #0072ff;"></i> Calendario Académico</div>
@@ -912,7 +963,7 @@
     </div>
 
     <script>
-        // Reloj y Fecha
+        // --- RELOJ Y FECHA ---
         function updateTime() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -927,7 +978,75 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Ventanas flotantes Modales
+        // --- SISTEMA DE MEMORIA NATIVA (localStorage) ---
+        const notesTextarea = document.getElementById('notesMemory');
+
+        // Cargar Notas desde memoria al iniciar
+        if (localStorage.getItem('jarvis_notes')) {
+            notesTextarea.value = localStorage.getItem('jarvis_notes');
+        }
+
+        // Guardar Notas automáticamente mientras escribes
+        notesTextarea.addEventListener('input', function() {
+            localStorage.setItem('jarvis_notes', notesTextarea.value);
+        });
+
+        // Tareas por defecto si la memoria está vacía
+        let defaultTodos = [
+            { text: "Revisar actas de notas", checked: true },
+            { text: "Generar croquis de aulas", checked: false },
+            { text: "Sincronizar SharePoint", checked: false }
+        ];
+
+        let todos = JSON.parse(localStorage.getItem('jarvis_todos')) || defaultTodos;
+
+        function saveTodos() {
+            localStorage.setItem('jarvis_todos', JSON.stringify(todos));
+        }
+
+        function renderTodos() {
+            const container = document.getElementById('todoListContainer');
+            container.innerHTML = "";
+            todos.forEach((todo, index) => {
+                const item = document.createElement('div');
+                item.className = "todo-item";
+                item.innerHTML = `
+                    <div class="todo-item-left">
+                        <input type="checkbox" ${todo.checked ? 'checked' : ''} onchange="toggleTodo(${index})">
+                        <span style="${todo.checked ? 'text-decoration: line-through; color: #94a3b8;' : ''}">${todo.text}</span>
+                    </div>
+                    <i class="fa-solid fa-trash-can delete-todo" onclick="deleteTodo(${index})"></i>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function toggleTodo(index) {
+            todos[index].checked = !todos[index].checked;
+            saveTodos();
+            renderTodos();
+        }
+
+        function addNewTodo() {
+            const taskText = prompt("Introduce el nombre de la nueva tarea:");
+            if (taskText && taskText.trim() !== "") {
+                todos.push({ text: taskText.trim(), checked: false });
+                saveTodos();
+                renderTodos();
+            }
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            saveTodos();
+            renderTodos();
+        }
+
+        // Inicializar la lista de tareas
+        renderTodos();
+
+
+        // --- MODALES ---
         function openModal(id) {
             document.getElementById(id).classList.add('active');
             if(id === 'calendarModal') renderCalendar();
@@ -936,7 +1055,7 @@
             document.getElementById(id).classList.remove('active');
         }
 
-        // Calculadora
+        // --- CALCULADORA ---
         let calcExpression = "";
         function pressCalc(val) { calcExpression += val; document.getElementById('calcOutput').textContent = calcExpression; }
         function clearCalc() { calcExpression = ""; document.getElementById('calcOutput').textContent = "0"; document.getElementById('calcHistory').textContent = ""; }
@@ -962,7 +1081,7 @@
             } catch (e) { document.getElementById('calcOutput').textContent = "Error"; calcExpression = ""; }
         }
 
-        // Calendario
+        // --- CALENDARIO ---
         let currentCalendarDate = new Date();
         function renderCalendar() {
             const year = currentCalendarDate.getFullYear();
