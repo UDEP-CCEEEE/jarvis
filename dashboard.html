@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JARVIS OS - Login</title>
-
+    <title>JARVIS OS - Dashboard</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         /* ==========================================================================
-           ESTILOS CSS (Estilo Windows 11 / Glassmorphism)
+           ESTILOS BASE Y DESKTOP
            ========================================================================== */
         * {
             margin: 0;
@@ -21,249 +20,552 @@
         }
 
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: #0b0f19;
+            color: #fff;
             min-height: 100vh;
-            background: #0b0f19; 
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
             position: relative;
         }
 
-        /* Fondo dinámico difuminado */
+        /* Fondo de orbes estilo Windows 11 */
         .background {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, transparent 50%),
-                        radial-gradient(circle at 20% 80%, #0d9488 0%, transparent 50%);
-            filter: blur(80px);
-            z-index: -1;
+            background: radial-gradient(circle at 10% 20%, #1e3a8a 0%, transparent 45%),
+                        radial-gradient(circle at 90% 80%, #0d9488 0%, transparent 45%);
+            filter: blur(100px);
+            z-index: -2;
         }
 
-        /* Contenedor Principal (Efecto Vidrio Esmerilado) */
-        .login-container {
-            position: relative;
-            width: 420px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transition: transform 0.3s ease, border 0.3s ease;
-        }
-
-        .login-container:hover {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Identidad Visual Alineada (Logo al costado del Texto) */
-        .brand-header {
+        /* ==========================================================================
+           BARRA SUPERIOR (MENÚ WINDOWS STYLE)
+           ========================================================================== */
+        .top-bar {
+            height: 48px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 15px; /* Espacio entre el logo y el texto */
-            margin-bottom: 8px;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
         }
 
-        .brand-header img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(0, 242, 254, 0.6);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .brand-header h1 {
-            color: #ffffff;
-            font-size: 1.9rem;
+        .brand-os {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-weight: 600;
-            letter-spacing: 1px;
+            font-size: 0.95rem;
+            margin-right: 15px;
+            color: #00f2fe;
         }
 
-        .logo p {
-            color: #94a3b8;
-            font-size: 0.70rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 30px;
+        .brand-os img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
         }
 
-        /* Campos de Entrada de Datos */
-        .input-box {
+        /* Menús Desplegables con Hover */
+        .menu-item {
             position: relative;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        /* Contenedor del Submenú */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: rgba(20, 27, 45, 0.92);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            padding: 6px 0;
+            margin-top: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .menu-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background 0.15s ease;
+        }
+
+        .dropdown a:hover {
+            background: linear-gradient(90deg, rgba(0, 114, 255, 0.3), rgba(0, 242, 254, 0.1));
+            color: #00f2fe;
+        }
+
+        /* Barra de búsqueda superior */
+        .search-box {
+            position: relative;
+            width: 260px;
+        }
+
+        .search-box input {
             width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 5px 12px 5px 35px;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-box input:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #00f2fe;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 52%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================================================
+           ÁREA PRINCIPAL DE TRABAJO (GRID REPARTIDO)
+           ========================================================================== */
+        .main-workspace {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 340px; /* Panel Central | Barra Lateral Right */
+            padding: 24px;
+            gap: 24px;
+            overflow: hidden;
+        }
+
+        /* PANEL CENTRAL */
+        .center-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
             margin-bottom: 20px;
         }
 
-        .input-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+        .jarvis-core-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #00f2fe;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+            margin-bottom: 20px;
+            animation: pulse 3s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 25px rgba(0, 242, 254, 0.3); }
+            100% { transform: scale(1.04); box-shadow: 0 0 45px rgba(0, 242, 254, 0.6); }
+        }
+
+        .welcome-section h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .welcome-section p {
             color: #94a3b8;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+
+        .status-overview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .status-card {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.88rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+        }
+
+        .status-card i {
+            color: #10b981;
             font-size: 1.1rem;
         }
 
-        .input-box input {
-            width: 100%;
-            padding: 12px 16px 12px 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            outline: none;
-            color: #fff;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+        /* ACCESOS RÁPIDOS (BOTONES GRANDES INFERIORES) */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: auto;
         }
 
-        .input-box input:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #00f2fe;
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
-        }
-
-        .input-box input::placeholder {
-            color: #64748b;
-        }
-
-        /* Checkbox Recordarme */
-        .remember {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-bottom: 25px;
-            color: #94a3b8;
-            font-size: 0.85rem;
-        }
-
-        .remember input {
-            margin-right: 8px;
-            accent-color: #00f2fe;
+        .action-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
             cursor: pointer;
-        }
-
-        /* Botón de Acceso Principal */
-        button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #0072ff 0%, #00f2fe 100%);
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
+            color: #cbd5e1;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             gap: 10px;
-            transition: opacity 0.3s ease, transform 0.2s ease;
         }
 
-        button:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+        .action-btn i {
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #0072ff, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Alertas de Validación */
-        #mensajeError {
-            font-size: 0.85rem;
-            margin-top: 15px;
-            min-height: 20px;
-            font-weight: 400;
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #00f2fe;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.15);
+            color: #fff;
         }
 
-        /* Etiqueta de Versión Inferior */
-        .version {
-            position: absolute;
-            bottom: 20px;
-            color: #475569;
-            font-size: 0.8rem;
+        /* BARRA LATERAL DERECHA */
+        .right-sidebar {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(15px);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            overflow-y: auto;
+        }
+
+        .widget-box h3 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Widgets Específicos */
+        .time-widget {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        #clock {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
             letter-spacing: 1px;
+        }
+
+        #date {
+            font-size: 0.85rem;
+            color: #00f2fe;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 18px;
+            border-radius: 12px;
+        }
+
+        .weather-temp {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .todo-list, .notes-box {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .todo-item input {
+            accent-color: #00f2fe;
+        }
+
+        .notes-area {
+            width: 100%;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 10px;
+            color: #fff;
+            resize: none;
+            font-size: 0.85rem;
+            outline: none;
         }
     </style>
 </head>
-
 <body>
 
     <div class="background"></div>
 
-    <div class="login-container">
-        <div class="logo">
-            <div class="brand-header">
-                <img src="assets/logo/JARVIS.PNG.jfif" alt="JARVIS Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
-                <h1>JARVIS OS</h1>
+    <header class="top-bar">
+        <div class="nav-container">
+            <div class="brand-os">
+                <img src="assets/logo/JARVIS.PNG.jfif" alt="J" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                <span>JARVIS OS</span>
             </div>
-            <p>Just Advanced Responsive Virtual Intelligence System</p>
+
+            <div class="menu-item">
+                <i class="fa-regular fa-folder"></i> Archivos
+                <div class="dropdown">
+                    <a href="#"><i class="fa-solid fa-calendar-days"></i> Cronograma de exámenes</a>
+                    <a href="#"><i class="fa-solid fa-users-rectangle"></i> Distribución de apellidos</a>
+                    <a href="#"><i class="fa-solid fa-school"></i> Reparto de aulas</a>
+                    <a href="#"><i class="fa-solid fa-graduation-cap"></i> Calendario académico</a>
+                    <a href="#"><i class="fa-solid fa-file-signature"></i> Actas</a>
+                    <a href="#"><i class="fa-solid fa-scroll"></i> Resoluciones</a>
+                    <a href="#"><i class="fa-solid fa-envelope-open-text"></i> Oficios</a>
+                    <a href="#"><i class="fa-solid fa-certificate"></i> Constancias</a>
+                    <a href="#"><i class="fa-regular fa-file-word"></i> Plantillas Word</a>
+                    <a href="#"><i class="fa-regular fa-file-excel"></i> Plantillas Excel</a>
+                    <a href="#"><i class="fa-solid fa-building-columns"></i> Documentos SUNEDU</a>
+                    <a href="#"><i class="fa-solid fa-hard-drive"></i> Mis documentos</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <i class="fa-solid fa-gears"></i> Generar
+                <div class="dropdown">
+                    <a href="#"><i class="fa-solid fa-map"></i> Croquis de aulas</a>
+                    <a href="#"><i class="fa-solid fa-qrcode"></i> QR para exámenes</a>
+                    <a href="#"><i class="fa-solid fa-list-ol"></i> Lista de alumnos</a>
+                    <a href="#"><i class="fa-solid fa-tags"></i> Etiquetas</a>
+                    <a href="#"><i class="fa-regular fa-envelope"></i> Cartas</a>
+                    <a href="#"><i class="fa-regular fa-clipboard"></i> Memorandos</a>
+                    <a href="#"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                    <a href="#"><i class="fa-solid fa-certificate"></i> Certificados</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <i class="fa-solid fa-hotel"></i> Secretaría
+                <div class="dropdown">
+                    <a href="#"><i class="fa-regular fa-clock"></i> Horarios</a>
+                    <a href="#"><i class="fa-solid fa-chalkboard-user"></i> Docentes</a>
+                    <a href="#"><i class="fa-solid fa-book"></i> Cursos</a>
+                    <a href="#"><i class="fa-solid fa-door-open"></i> Aulas</a>
+                    <a href="#"><i class="fa-solid fa-user-graduate"></i> Estudiantes</a>
+                    <a href="#"><i class="fa-solid fa-file-lines"></i> Notas</a>
+                    <a href="#"><i class="fa-solid fa-users"></i> Jurados</a>
+                    <a href="#"><i class="fa-solid fa-network-wired"></i> Mallas curriculares</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <i class="fa-solid fa-chart-pie"></i> Reportes
+                <div class="dropdown">
+                    <a href="#"><i class="fa-solid fa-chart-bar"></i> Power BI</a>
+                    <a href="#"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                    <a href="#"><i class="fa-solid fa-user-check"></i> Asistencia</a>
+                    <a href="#"><i class="fa-solid fa-square-poll-vertical"></i> Encuestas</a>
+                    <a href="#"><i class="fa-solid fa-calculator"></i> SPSS / R</a>
+                    <a href="#"><i class="fa-solid fa-file-export"></i> Exportar</a>
+                </div>
+            </div>
+
+            <div class="menu-item" style="color: #00f2fe; font-weight: 500;">
+                <i class="fa-solid fa-robot"></i> IA
+                <div class="dropdown">
+                    <a href="#"><i class="fa-solid fa-comments"></i> Preguntar a Jarvis</a>
+                    <a href="#"><i class="fa-solid fa-file-lines"></i> Resumir PDF</a>
+                    <a href="#"><i class="fa-solid fa-reply"></i> Responder correos</a>
+                    <a href="#"><i class="fa-solid fa-pen-nib"></i> Escribir documentos</a>
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i> Buscar archivos</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <i class="fa-solid fa-bolt"></i> Automatizaciones
+                <div class="dropdown">
+                    <a href="#"><i class="fa-solid fa-paper-plane"></i> Enviar correos</a>
+                    <a href="#"><i class="fa-solid fa-folder-plus"></i> Crear carpetas</a>
+                    <a href="#"><i class="fa-solid fa-cloud-arrow-up"></i> Sincronizar OneDrive / SharePoint</a>
+                    <a href="#"><i class="fa-brands fa-github"></i> Respaldo GitHub</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <i class="fa-regular fa-user"></i> Perfil
+                <div class="dropdown">
+                    <a href="#"><i class="fa-solid fa-sliders"></i> Configuración</a>
+                    <a href="#"><i class="fa-solid fa-moon"></i> Modo Oscuro</a>
+                    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+                </div>
+            </div>
         </div>
 
-        <form id="loginForm">
-            <div class="input-box">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="usuario" placeholder="Usuario" autocomplete="off" required>
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Buscar archivos o herramientas...">
+        </div>
+    </header>
+
+    <main class="main-workspace">
+        
+        <section class="center-panel">
+            <div class="welcome-section">
+                <img src="assets/logo/JARVIS.PNG.jfif" class="jarvis-core-logo" alt="JARVIS Core" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                <h2>Bienvenido, Lázaro</h2>
+                <p>Buenos días. El sistema operativo se encuentra completamente operativo.</p>
+                
+                <div class="status-overview">
+                    <div class="status-card"><i class="fa-solid fa-check-double"></i> 2 reuniones</div>
+                    <div class="status-card"><i class="fa-solid fa-file-invoice"></i> 3 documentos pend.</div>
+                    <div class="status-card"><i class="fa-solid fa-pen-to-square"></i> 1 examen prog.</div>
+                    <div class="status-card"><i class="fa-solid fa-envelope"></i> 5 correos sin leer</div>
+                </div>
             </div>
 
-            <div class="input-box">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" placeholder="Contraseña" required>
+            <div class="quick-actions">
+                <div class="action-btn"><i class="fa-solid fa-calendar-week"></i><span>Cronograma</span></div>
+                <div class="action-btn"><i class="fa-solid fa-users"></i><span>Distribución</span></div>
+                <div class="action-btn"><i class="fa-solid fa-chart-simple"></i><span>Power BI</span></div>
+                <div class="action-btn"><i class="fa-solid fa-cloud"></i><span>SharePoint</span></div>
+                <div class="action-btn"><i class="fa-brands fa-microsoft"></i><span>Outlook</span></div>
+            </div>
+        </section>
+
+        <aside class="right-sidebar">
+            <div class="widget-box time-widget">
+                <div id="clock">00:00:00</div>
+                <div id="date">Cargando fecha...</div>
             </div>
 
-            <div class="remember">
-                <label>
-                    <input type="checkbox"> Recordarme
-                </label>
+            <div class="widget-box">
+                <h3><i class="fa-solid fa-cloud-sun"></i> Clima</h3>
+                <div class="weather-info">
+                    <div>
+                        <div class="weather-temp">24°C</div>
+                        <div style="font-size: 0.8rem; color: #94a3b8;">Piura, Perú</div>
+                    </div>
+                    <i class="fa-solid fa-cloud-sun-rain" style="font-size: 1.8rem; color: #00f2fe;"></i>
+                </div>
             </div>
 
-            <button type="submit">
-                <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
-            </button>
+            <div class="widget-box">
+                <h3><i class="fa-solid fa-list-check"></i> Tareas de hoy</h3>
+                <div class="todo-list">
+                    <div class="todo-item"><input type="checkbox" checked> <span>Revisar actas de notas</span></div>
+                    <div class="todo-item"><input type="checkbox"> <span>Generar croquis de aulas</span></div>
+                    <div class="todo-item"><input type="checkbox"> <span>Sincronizar SharePoint</span></div>
+                </div>
+            </div>
 
-            <p id="mensajeError"></p>
-        </form>
-    </div>
-
-    <div class="version">
-        JARVIS OS v1.0
-    </div>
+            <div class="widget-box">
+                <h3><i class="fa-regular fa-note-sticky"></i> Notas rápidas</h3>
+                <textarea class="notes-area" placeholder="Escribe un recordatorio aquí..."></textarea>
+            </div>
+        </aside>
+    </main>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const usuarioInput = document.getElementById('usuario').value.trim();
-            const passwordInput = document.getElementById('password').value;
-            const mensajeError = document.getElementById('mensajeError');
-
-            // Credenciales asignadas v1.0
-            const USUARIO_VALIDO = "Lazaropuri";
-            const PASSWORD_VALIDO = "L@zaro0697";
-
-            if (usuarioInput === USUARIO_VALIDO && passwordInput === PASSWORD_VALIDO) {
-                mensajeError.style.color = "#10b981"; // Verde de éxito
-                mensajeError.innerHTML = '<i class="fa-solid fa-circle-check"></i> Acceso concedido. Iniciando JARVIS OS...';
-                
-                // Redirección limpia e inmediata al escritorio central tras 1 segundo
-                setTimeout(() => {
-                    window.location.href = "dashboard.html"; 
-                }, 1000);
-
-            } else {
-                mensajeError.style.color = "#ef4444"; // Rojo de error
-                if (usuarioInput !== USUARIO_VALIDO) {
-                    mensajeError.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> El usuario ingresado no existe.';
-                } else {
-                    mensajeError.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Contraseña incorrecta. Inténtalo de nuevo.';
-                }
-            }
-        });
+        function updateTime() {
+            const now = new Date();
+            
+            // Reloj
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // Fecha formato elegante
+            const options = { weekday: 'long', day: 'numeric', month: 'long' };
+            document.getElementById('date').textContent = now.toLocaleDateString('es-ES', options);
+        }
+        
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
-
 </body>
 </html>
