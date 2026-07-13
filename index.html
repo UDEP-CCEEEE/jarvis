@@ -25,12 +25,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #0b0f19; /* Fondo oscuro profundo */
+            background: #0b0f19; 
             overflow: hidden;
             position: relative;
         }
 
-        /* Efecto de fondo con orbes de luz estilo Windows 11 */
+        /* Fondo dinámico difuminado */
         .background {
             position: absolute;
             width: 100%;
@@ -46,7 +46,7 @@
         /* Contenedor Principal (Efecto Vidrio Esmerilado) */
         .login-container {
             position: relative;
-            width: 400px;
+            width: 420px;
             padding: 40px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
@@ -62,34 +62,37 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Identidad Visual del Sistema */
-        .logo {
-            margin-bottom: 25px;
+        /* Identidad Visual Alineada (Logo al costado del Texto) */
+        .brand-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Espacio entre el logo y el texto */
+            margin-bottom: 8px;
         }
 
-        .logo img {
-            width: 85px;
-            height: 85px;
+        .brand-header img {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid rgba(0, 242, 254, 0.5);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-            margin-bottom: 15px;
+            border: 2px solid rgba(0, 242, 254, 0.6);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
         }
 
-        .logo h1 {
+        .brand-header h1 {
             color: #ffffff;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 600;
             letter-spacing: 1px;
-            margin-bottom: 5px;
         }
 
         .logo p {
             color: #94a3b8;
-            font-size: 0.72rem;
+            font-size: 0.70rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 30px;
         }
 
         /* Campos de Entrada de Datos */
@@ -169,10 +172,6 @@
             transform: translateY(-1px);
         }
 
-        button:active {
-            transform: translateY(1px);
-        }
-
         /* Alertas de Validación */
         #mensajeError {
             font-size: 0.85rem;
@@ -198,8 +197,10 @@
 
     <div class="login-container">
         <div class="logo">
-            <img src="assets/logo/JARVIS.PNG.jfif" alt="JARVIS OS" onerror="this.style.display='none';">
-            <h1>JARVIS OS</h1>
+            <div class="brand-header">
+                <img src="assets/logo/JARVIS.PNG.jfif" alt="JARVIS Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                <h1>JARVIS OS</h1>
+            </div>
             <p>Just Advanced Responsive Virtual Intelligence System</p>
         </div>
 
@@ -240,22 +241,21 @@
             const passwordInput = document.getElementById('password').value;
             const mensajeError = document.getElementById('mensajeError');
 
-            // Credenciales asignadas para la fase de desarrollo v1.0
+            // Credenciales asignadas v1.0
             const USUARIO_VALIDO = "Lazaropuri";
             const PASSWORD_VALIDO = "L@zaro0697";
 
             if (usuarioInput === USUARIO_VALIDO && passwordInput === PASSWORD_VALIDO) {
-                mensajeError.style.color = "#10b981"; // Éxito en verde
+                mensajeError.style.color = "#10b981"; // Verde de éxito
                 mensajeError.innerHTML = '<i class="fa-solid fa-circle-check"></i> Acceso concedido. Iniciando JARVIS OS...';
                 
-                // Simulación del arranque del sistema y redirección a la interfaz central
+                // Redirección limpia e inmediata al escritorio central tras 1 segundo
                 setTimeout(() => {
-                    alert("¡Éxito! Aquí te redirigirá a tu panel central de JARVIS.");
-                    // window.location.href = "dashboard.html"; // Descomentar cuando exista el archivo
-                }, 1300);
+                    window.location.href = "dashboard.html"; 
+                }, 1000);
 
             } else {
-                mensajeError.style.color = "#ef4444"; // Error en rojo
+                mensajeError.style.color = "#ef4444"; // Rojo de error
                 if (usuarioInput !== USUARIO_VALIDO) {
                     mensajeError.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> El usuario ingresado no existe.';
                 } else {
