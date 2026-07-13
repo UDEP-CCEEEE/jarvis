@@ -1,98 +1,171 @@
-<!DOCTYPE html>
-<html lang="es">
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JARVIS OS</title>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0b0f19; /* Fondo oscuro profundo */
+    overflow: hidden;
+}
 
-    <link rel="stylesheet" href="css/login.css">
+/* Efecto de fondo con orbes de luz estilo Windows 11 */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at 80% 20%, #1e3a8a 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, #0d9488 0%, transparent 50%);
+    filter: blur(80px);
+    z-index: -1;
+}
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+/* Contenedor Glassmorphism */
+.login-container {
+    position: relative;
+    width: 400px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+.login-container:hover {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-</head>
+/* Logo e Identidad */
+.logo img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(0, 242, 254, 0.5);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+    margin-bottom: 15px;
+}
 
-<body>
+.logo h1 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
-    <div class="background"></div>
+.logo p {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-    <div class="login-container">
+/* Campos de entrada */
+.input-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-        <div class="logo">
+.input-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
 
-            <img src="assets/logo/JARVIS.PNG.jfif" alt="Jarvis">
+.input-box input {
+    width: 100%;
+    padding: 12px 16px 12px 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    outline: none;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
 
-            <h1>JARVIS OS</h1>
+.input-box input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #00f2fe;
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
 
-            <p>Just Advanced Responsive Virtual Intelligence System</p>
+.input-box input::placeholder {
+    color: #64748b;
+}
 
-        </div>
+/* Opciones extras */
+.remember {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 25px;
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
 
-        <form id="loginForm">
+.remember input {
+    margin-right: 8px;
+    accent-color: #00f2fe;
+}
 
-            <div class="input-box">
+/* Botón de acceso */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #0072ff 0%, #00f2fe 100%);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
 
-                <i class="fa-solid fa-user"></i>
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
 
-                <input
-                    type="text"
-                    id="usuario"
-                    placeholder="Usuario"
-                    autocomplete="off"
-                    required>
+button:active {
+    transform: translateY(1px);
+}
 
-            </div>
+/* Mensajes de error dinámicos */
+#mensajeError {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    min-height: 20px;
+}
 
-            <div class="input-box">
-
-                <i class="fa-solid fa-lock"></i>
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Contraseña"
-                    required>
-
-            </div>
-
-            <div class="remember">
-
-                <label>
-
-                    <input type="checkbox">
-
-                    Recordarme
-
-                </label>
-
-            </div>
-
-            <button type="submit">
-
-                <i class="fa-solid fa-right-to-bracket"></i>
-
-                Iniciar sesión
-
-            </button>
-
-            <p id="mensajeError"></p>
-
-        </form>
-
-    </div>
-
-    <div class="version">
-
-        JARVIS OS v1.0
-
-    </div>
-
-    <script src="js/login.js"></script>
-
-</body>
-
-</html>
+/* Marca de agua de versión */
+.version {
+    position: absolute;
+    bottom: 20px;
+    color: #475569;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
