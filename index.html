@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS OS</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="background"></div>
+
+    <div class="login-container">
+
+        <div class="logo">
+
+            <img src="assets/logo/JARVIS.PNG.jfif" alt="Jarvis">
+
+            <h1>JARVIS OS</h1>
+
+            <p>Just Advanced Responsive Virtual Intelligence System</p>
+
+        </div>
+
+        <form id="loginForm">
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-user"></i>
+
+                <input
+                    type="text"
+                    id="usuario"
+                    placeholder="Usuario"
+                    autocomplete="off"
+                    required>
+
+            </div>
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Contraseña"
+                    required>
+
+            </div>
+
+            <div class="remember">
+
+                <label>
+
+                    <input type="checkbox">
+
+                    Recordarme
+
+                </label>
+
+            </div>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Iniciar sesión
+
+            </button>
+
+            <p id="mensajeError"></p>
+
+        </form>
+
+    </div>
+
+    <div class="version">
+
+        JARVIS OS v1.0
+
+    </div>
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>
