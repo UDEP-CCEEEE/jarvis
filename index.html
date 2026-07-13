@@ -71,13 +71,24 @@
             margin-bottom: 8px;
         }
 
-        .brand-header img {
+        /* Contenedor para recortar el halo blanco del mini logo */
+        .mini-logo-wrapper {
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(0, 242, 254, 0.6);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #00f2fe;
             box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        .mini-logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.28); /* Oculta el borde blanco exterior */
         }
 
         .brand-header h1 {
@@ -193,7 +204,9 @@
     <div class="login-container">
         <div class="logo">
             <div class="brand-header">
-                <img src="JARVIS OS.png" alt="JARVIS OS" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                <div class="mini-logo-wrapper">
+                    <img src="JARVIS OS.png" alt="JARVIS OS" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
+                </div>
                 <h1>JARVIS OS</h1>
             </div>
             <p>Just Advanced Responsive Virtual Intelligence System</p>
