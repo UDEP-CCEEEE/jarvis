@@ -45,7 +45,7 @@
 
         /* ==========================================================================
            BARRA SUPERIOR (MENÚ WINDOWS STYLE)
-           ========================================================================= */
+           ========================================================================== */
         .top-bar {
             height: 50px;
             background: rgba(15, 23, 42, 0.6);
@@ -75,7 +75,6 @@
             color: #00f2fe;
         }
 
-        /* Contenedor para ocultar borde blanco del logo de la barra superior */
         .top-logo-wrapper {
             width: 28px;
             height: 28px;
@@ -215,7 +214,6 @@
             margin-bottom: 20px;
         }
 
-        /* Contenedor perfecto para recortar el halo blanco del logo central */
         .logo-wrapper {
             width: 110px;
             height: 110px;
@@ -234,7 +232,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: scale(1.28); /* Ajuste dinámico de zoom */
+            transform: scale(1.28);
         }
 
         @keyframes pulse {
@@ -412,6 +410,199 @@
             font-size: 0.85rem;
             outline: none;
         }
+
+        /* ==========================================================================
+           VENTANAS MODULARES FLOTANTES (MODALES WINDOWS STYLE)
+           ========================================================================== */
+        .window-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(20, 27, 45, 0.88);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .window-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .window-header {
+            height: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            cursor: move;
+        }
+
+        .window-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .window-controls button {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .window-controls button.close-btn:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .window-body {
+            padding: 20px;
+        }
+
+        /* DISEÑO DE LA CALCULADORA CIENTÍFICA */
+        .calc-container {
+            width: 320px;
+        }
+
+        .calc-display {
+            width: 100%;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            padding: 10px;
+            text-align: right;
+            outline: none;
+        }
+
+        .calc-display .calc-history {
+            font-size: 0.75rem;
+            color: #64748b;
+            min-height: 15px;
+        }
+
+        .calc-display .calc-output {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .calc-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            padding: 12px 0;
+            color: #e2e8f0;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .calc-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .calc-btn.op {
+            background: rgba(0, 114, 255, 0.15);
+            color: #00f2fe;
+        }
+
+        .calc-btn.eq {
+            background: linear-gradient(135deg, #0072ff, #00f2fe);
+            color: #fff;
+            grid-column: span 2;
+        }
+
+        /* DISEÑO DEL CALENDARIO AVANZADO */
+        .calendar-container {
+            width: 350px;
+        }
+
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .calendar-header h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .calendar-header button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+        }
+
+        .calendar-days div {
+            font-size: 0.85rem;
+            padding: 8px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: #cbd5e1;
+        }
+
+        .calendar-days div:hover:not(.empty) {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .calendar-days div.today {
+            background: #0072ff;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(0, 114, 255, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -520,8 +711,8 @@
             <div class="menu-item">
                 <i class="fa-solid fa-screwdriver-wrench"></i> Herramientas
                 <div class="dropdown">
-                    <a href="#"><i class="fa-solid fa-calculator"></i> Calculadora</a>
-                    <a href="#"><i class="fa-regular fa-calendar"></i> Calendario</a>
+                    <a href="#" onclick="openModal('calcModal')"><i class="fa-solid fa-calculator"></i> Calculadora</a>
+                    <a href="#" onclick="openModal('calendarModal')"><i class="fa-regular fa-calendar"></i> Calendario</a>
                     <a href="#"><i class="fa-solid fa-arrows-rotate"></i> Conversor</a>
                     <a href="#"><i class="fa-regular fa-clock"></i> Temporizador</a>
                     <a href="#"><i class="fa-regular fa-file-lines"></i> Bloc de notas</a>
@@ -571,7 +762,6 @@
     <main class="main-workspace">
         <section class="center-panel">
             <div class="welcome-section">
-                <!-- Contenedor que recorta el halo blanco exterior -->
                 <div class="logo-wrapper">
                     <img src="JARVIS OS.png" class="jarvis-core-logo" alt="JARVIS Core" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png';">
                 </div>
@@ -634,7 +824,92 @@
         </aside>
     </main>
 
+    <!-- ==========================================================================
+         VENTANA MODAL: CALCULADORA CIENTÍFICA
+         ========================================================================== */ -->
+    <div id="calcModal" class="window-modal">
+        <div class="window-header">
+            <div class="window-title"><i class="fa-solid fa-calculator" style="color: #00f2fe;"></i> Calculadora Científica</div>
+            <div class="window-controls">
+                <button class="close-btn" onclick="closeModal('calcModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="calc-container">
+                <div class="calc-display">
+                    <div id="calcHistory" class="calc-history"></div>
+                    <div id="calcOutput" class="calc-output">0</div>
+                </div>
+                <div class="calc-grid">
+                    <button class="calc-btn op" onclick="calcScientific('sin')">sin</button>
+                    <button class="calc-btn op" onclick="calcScientific('cos')">cos</button>
+                    <button class="calc-btn op" onclick="calcScientific('tan')">tan</button>
+                    <button class="calc-btn op" onclick="calcScientific('sqrt')">√</button>
+                    <button class="calc-btn op" onclick="clearCalc()">C</button>
+
+                    <button class="calc-btn op" onclick="calcScientific('log')">log</button>
+                    <button class="calc-btn op" onclick="pressCalc('(')">(</button>
+                    <button class="calc-btn op" onclick="pressCalc(')')">)</button>
+                    <button class="calc-btn op" onclick="calcScientific('pow')">xʸ</button>
+                    <button class="calc-btn op" onclick="pressCalc('/')">/</button>
+
+                    <button class="calc-btn" onclick="pressCalc('7')">7</button>
+                    <button class="calc-btn" onclick="pressCalc('8')">8</button>
+                    <button class="calc-btn" onclick="pressCalc('9')">9</button>
+                    <button class="calc-btn op" onclick="calcScientific('pi')">π</button>
+                    <button class="calc-btn op" onclick="pressCalc('*')">×</button>
+
+                    <button class="calc-btn" onclick="pressCalc('4')">4</button>
+                    <button class="calc-btn" onclick="pressCalc('5')">5</button>
+                    <button class="calc-btn" onclick="pressCalc('6')">6</button>
+                    <button class="calc-btn op" onclick="calcScientific('exp')">exp</button>
+                    <button class="calc-btn op" onclick="pressCalc('-')">-</button>
+
+                    <button class="calc-btn" onclick="pressCalc('1')">1</button>
+                    <button class="calc-btn" onclick="pressCalc('2')">2</button>
+                    <button class="calc-btn" onclick="pressCalc('3')">3</button>
+                    <button class="calc-btn op" onclick="pressCalc('.')">.</button>
+                    <button class="calc-btn op" onclick="pressCalc('+')">+</button>
+
+                    <button class="calc-btn" onclick="pressCalc('0')">0</button>
+                    <button class="calc-btn op" onclick="backspaceCalc()"><i class="fa-solid fa-delete-left"></i></button>
+                    <button class="calc-btn eq" onclick="calculateResult()">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         VENTANA MODAL: CALENDARIO MENSUAL
+         ========================================================================== */ -->
+    <div id="calendarModal" class="window-modal">
+        <div class="window-header">
+            <div class="window-title"><i class="fa-regular fa-calendar" style="color: #00f2fe;"></i> Calendario Académico</div>
+            <div class="window-controls">
+                <button class="close-btn" onclick="closeModal('calendarModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <h4 id="calendarMonthYear">Mes Año</h4>
+                    <button onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+                </div>
+                <div id="calendarDays" class="calendar-days"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+         LÓGICA JAVASCRIPT (TIEMPO, MODALES, CALCULADORA Y CALENDARIO)
+         ========================================================================== -->
     <script>
+        // --- RELOJ Y FECHA ---
         function updateTime() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -648,6 +923,100 @@
         }
         setInterval(updateTime, 1000);
         updateTime();
+
+        // --- SISTEMA VENTANAS FLOTANTES (MODALES) ---
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            if(id === 'calendarModal') renderCalendar();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // --- LÓGICA CALCULADORA CIENTÍFICA ---
+        let calcExpression = "";
+
+        function pressCalc(val) {
+            calcExpression += val;
+            document.getElementById('calcOutput').textContent = calcExpression;
+        }
+
+        function clearCalc() {
+            calcExpression = "";
+            document.getElementById('calcOutput').textContent = "0";
+            document.getElementById('calcHistory').textContent = "";
+        }
+
+        function backspaceCalc() {
+            calcExpression = calcExpression.slice(0, -1);
+            document.getElementById('calcOutput').textContent = calcExpression || "0";
+        }
+
+        function calcScientific(func) {
+            if (func === 'pi') { calcExpression += Math.PI.toFixed(5); }
+            else if (func === 'sin') { calcExpression = `Math.sin(${calcExpression || 0})`; }
+            else if (func === 'cos') { calcExpression = `Math.cos(${calcExpression || 0})`; }
+            else if (func === 'tan') { calcExpression = `Math.tan(${calcExpression || 0})`; }
+            else if (func === 'sqrt') { calcExpression = `Math.sqrt(${calcExpression || 0})`; }
+            else if (func === 'log') { calcExpression = `Math.log10(${calcExpression || 0})`; }
+            else if (func === 'exp') { calcExpression = `Math.exp(${calcExpression || 0})`; }
+            else if (func === 'pow') { calcExpression += `**`; }
+            
+            document.getElementById('calcOutput').textContent = calcExpression;
+        }
+
+        function calculateResult() {
+            try {
+                if (!calcExpression) return;
+                document.getElementById('calcHistory').textContent = calcExpression;
+                // Procesado seguro y básico de la expresión matemática
+                let result = eval(calcExpression);
+                calcExpression = String(result);
+                document.getElementById('calcOutput').textContent = calcExpression;
+            } catch (error) {
+                document.getElementById('calcOutput').textContent = "Error";
+                calcExpression = "";
+            }
+        }
+
+        // --- LÓGICA CALENDARIO INTERACTIVO ---
+        let currentCalendarDate = new Date();
+
+        function renderCalendar() {
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            
+            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+            document.getElementById('calendarMonthYear').textContent = `${monthNames[month]} ${year}`;
+
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const lastDay = new Date(year, month + 1, 0).getDate();
+
+            let daysHTML = "";
+
+            // Celdas vacías del mes anterior
+            for (let i = 0; i < firstDayIndex; i++) {
+                daysHTML += `<div class="empty"></div>`;
+            }
+
+            // Días del mes actual
+            const today = new Date();
+            for (let day = 1; day <= lastDay; day++) {
+                if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    daysHTML += `<div class="today">${day}</div>`;
+                } else {
+                    daysHTML += `<div>${day}</div>`;
+                }
+            }
+
+            document.getElementById('calendarDays').innerHTML = daysHTML;
+        }
+
+        function changeMonth(direction) {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + direction);
+            renderCalendar();
+        }
     </script>
 </body>
 </html>
